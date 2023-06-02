@@ -16,25 +16,14 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-wc=_d30gm)v-u&xuw@+ag=h3%qf*i@2$mb@$vxo_u#6km%y^hj'
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
 import os
 SECRET_KEY = config("SECRET_KEY")
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
