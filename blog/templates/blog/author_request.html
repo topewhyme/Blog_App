@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}<title>Author Request</title>{% endblock %}
+
+{% block content %}
+  <h1>Author Request</h1>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% else %}
+    <form method="post" action="{% url 'author_request' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  {% endif %}
+{% endblock %}

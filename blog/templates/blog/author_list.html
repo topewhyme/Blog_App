@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>All bloggers</h1>
+
+    {% if object_list %}
+    <ul>
+        {% for author in object_list %}
+        <li>
+            <strong>{{ author }}</strong> (
+            {{ author.num_blogs }} {% if author.num_blogs == 1 %}blog post{% else %}blog posts{% endif %}
+            )
+            <a href="{% url 'blogs-by-author' author.pk %}">View bio and blogs</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no bloggers yet.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Blogger: {{ author.user }}</h1>
+  <h4>Blogger Name: {{ author.first_name }} {{ author.last_name }}</h4>
+  <h2><strong>Bio</strong></h2>
+  <p>{{ author.bio }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Blogs List</h4>
+
+    {% for copy in blogs %}
+      <hr />
+      <ul>
+        <li>
+          <p><a href = "{{ copy.get_absolute_url }}">{{ copy.name }}</a> ({{copy.post_date }})</p>
+        </li>
+      </ul>
+    {% endfor %}
+  </div>
+{% endblock %}

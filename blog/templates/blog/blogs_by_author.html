@@ -1,0 +1,22 @@
+<!-- blog_list_by_author.html -->
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<h2>Blogs by {{ user.author.user }}</h2>
+
+{% for blog in blog_list %}
+    <div class="blog">
+        <h3>{{ blog.name }}</h3>
+        <!--<p>{{ blog.description }}</p>
+        <p>Author: {{ blog.author }}</p>-->
+        <a href="{% url 'post_edit' pk=blog.pk %}" class="edit-button">Edit Post</a>
+        <p>Post Date: {{ blog.post_date }}</p>
+        <p>Last Updated: {{ blog.last_updated }}</p>
+    </div>
+{% empty %}
+    <p>No blogs found.</p>
+{% endfor %}
+
+{% endblock %}

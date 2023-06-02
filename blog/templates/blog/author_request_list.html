@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <ul>
+    {% for author_request in author_requests %}
+      <li>{{ author_request.user.get_username }} - {{ author_request.first_name }} {{ author_request.last_name }} (<a href="{% url 'approve_author_request' author_request.pk %}">Approve</a>)</li>
+    {% empty %}
+      <li>No author requests</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
