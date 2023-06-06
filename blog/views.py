@@ -31,6 +31,7 @@ from .forms import SignupForm
 from django.views.generic import UpdateView
 from django.core.exceptions import PermissionDenied
 from .forms import BlogForm
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 
 def index(request):
@@ -50,7 +51,7 @@ class BlogListView(generic.ListView):
     def get_queryset(self):
         return super().get_queryset().filter(is_deleted=False)
 
-class BlogListbyAuthorView(generic.DetailView):
+class BlogListbyAuthorView(LoginRequiredMixin, generic.DetailView):
     model = Author
     template_name = 'blog/blog_list_by_author.html'
 
@@ -100,7 +101,7 @@ class BlogsbyAuthorView(generic.ListView):
 # class BlogDetailView(generic.DetailView):
 #     model = Blog
     
-class BlogDetailView(generic.DetailView):
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
 
     def get_context_data(self, **kwargs):
@@ -110,7 +111,7 @@ class BlogDetailView(generic.DetailView):
         return context
 
 
-class BloggerListView(generic.ListView):
+class BloggerListView(LoginRequiredMixin, generic.ListView):
     model = Author
     paginate_by = 5
     template_name = 'blog/author_list.html'
@@ -152,12 +153,15 @@ class BlogCommentCreate(LoginRequiredMixin, CreateView):
     
 
 
-class SignupView(CreateView):
+class SignupViews(CreateView):
     form_class = SignupForm
     template_name = 'blog/signup.html'
     success_url = reverse_lazy('login')
 
-
+class SignupView(CreateView):
+    form_class = SignupForm
+    template_name = 'blog/signup.html'
+    success_url = reverse_lazy('login')
 
 class AuthorRequestView(LoginRequiredMixin, View):
     form_class = AuthorRequestForm
